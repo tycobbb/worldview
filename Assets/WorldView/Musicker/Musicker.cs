@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// a thing that plays music
 public class Musicker: MonoBehaviour {
@@ -29,7 +28,7 @@ public class Musicker: MonoBehaviour {
     float[] m_SourceVolumes;
 
     /// the id of the current loop
-    int m_LoopId;
+    int m_LoopId = -1;
 
     // -- lifecycle --
     void Awake() {
@@ -43,6 +42,10 @@ public class Musicker: MonoBehaviour {
             m_Sources.Add(go.AddComponent<AudioSource>());
             m_SourceVolumes[i] = 1.0f;
         }
+    }
+
+    void OnDisable() {
+        Reset();
     }
 
     // -- commands --
@@ -60,6 +63,10 @@ public class Musicker: MonoBehaviour {
 
     /// toggle the loop
     public void ToggleLoop(Loop loop, bool isPlaying, Key? key = null) {
+        if (isPlaying == IsPlayingLoop) {
+            return;
+        }
+
         if (isPlaying) {
             PlayLoop(loop, key);
         } else {
@@ -226,6 +233,12 @@ public class Musicker: MonoBehaviour {
     }
 
     // -- props/hot
+    /// the master volume
+    public float Volume {
+        get => m_Volume;
+        set => m_Volume = value;
+    }
+
     /// the current instrument
     public Instrument Instrument {
         get => m_Instrument;

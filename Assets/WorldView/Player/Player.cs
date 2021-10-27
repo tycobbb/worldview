@@ -3,15 +3,28 @@ using UnityEngine.InputSystem;
 
 /// the player
 public class Player: MonoBehaviour {
+    // -- statics --
+    /// the being layer
+    int s_BeingLayer = -1;
+
     // -- tuning --
     [Header("tuning")]
     [Tooltip("the look speed, a torque")]
     [SerializeField] float m_LookSpeed = 0.5f;
 
+    [Tooltip("the max range of the hearing cone")]
+    [SerializeField] float m_HearingRange = 0.5f;
+
+    [Tooltip("the min threshold for the hearing cone")]
+    [SerializeField] float m_HearingThreshold = 0.5f;
+
     // -- nodes --
     [Header("nodes")]
-    [Tooltip("the camera armature")]
-    [SerializeField] Rigidbody m_Armature;
+    [Tooltip("the root transform")]
+    [SerializeField] Transform m_Root;
+
+    [Tooltip("the player's rigidbody")]
+    [SerializeField] Rigidbody m_Body;
 
     [Tooltip("the input system input")]
     [SerializeField] PlayerInput m_Input;
@@ -20,6 +33,9 @@ public class Player: MonoBehaviour {
     /// the current look magnitude
     float m_Look;
 
+    /// the list of heard beings
+    Collider[] m_Heard = new Collider[100];
+
     /// the player's inputs
     PlayerActions m_Actions;
 
@@ -27,6 +43,11 @@ public class Player: MonoBehaviour {
     void Awake() {
         // set props
         m_Actions = new PlayerActions(m_Input);
+
+        // set statics
+        if (s_BeingLayer == -1) {
+            s_BeingLayer = LayerMask.NameToLayer("Being");
+        }
     }
 
     void Update() {
@@ -39,6 +60,9 @@ public class Player: MonoBehaviour {
         // move player
         Move();
         Look();
+
+        // listen for beings
+        Hear();
     }
 
     // -- commands --
@@ -59,6 +83,39 @@ public class Player: MonoBehaviour {
     /// move camera
     void Look() {
         var torque = m_Look * m_LookSpeed * Time.deltaTime * Vector3.left;
-        m_Armature.AddRelativeTorque(torque);
+        m_Body.AddRelativeTorque(torque);
+    }
+
+    // listen for beings
+    void Hear() {
+        var pos = m_Root.position;
+
+        // check for any beings in range
+        var nHits = Physics.OverlapSphereNonAlloc(
+            pos,
+            m_HearingRange,
+            m_Heard,
+            1 << s_BeingLayer
+        );
+
+        // for each being
+        for (var i = 0; i < nHits; i++) {
+            var hit = m_Heard[i];
+
+            // get the direction to the being
+            var dir = Vector3.Normalize(hit.transform.position - pos);
+
+            // if it's within the hearing cone
+            var alignment = Vector3.Dot(m_Root.forward, dir);
+            if (alignment < m_HearingThreshold) {
+                continue;
+            }
+
+            // set it to audible
+            var being = hit.GetComponent<Being>();
+            if (being != null) {
+                being.SetAudible(true);
+            }
+        }
     }
 }
