@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!20 &77418175 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8039918059354078096, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
+  m_PrefabInstance: {fileID: 1734490471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &416082101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7627500171584167736, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
@@ -373,6 +378,18 @@ PrefabInstance:
     - target: {fileID: 4562596083273999881, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8122358992940196095, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8122358992940196095, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 77418175}
+    - target: {fileID: 8122358992940196095, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
