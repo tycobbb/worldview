@@ -4,14 +4,22 @@ using UnityEngine.InputSystem;
 /// the player
 public class Player: MonoBehaviour {
     // -- tuning --
-    [Header("tuning")] [Tooltip("the move speed in percent per second")] [SerializeField]
-    float m_MoveSpeed = 0.5f;
+    [Header("tuning")]
+    [Tooltip("the look speed, a torque")]
+    [SerializeField] float m_LookSpeed = 0.5f;
 
     // -- nodes --
-    [Header("nodes")] [Tooltip("the input system input")] [SerializeField]
-    PlayerInput m_Input;
+    [Header("nodes")]
+    [Tooltip("the camera armature")]
+    [SerializeField] Rigidbody m_Armature;
+
+    [Tooltip("the input system input")]
+    [SerializeField] PlayerInput m_Input;
 
     // -- props --
+    /// the current look magnitude
+    float m_Look;
+
     /// the player's inputs
     PlayerActions m_Actions;
 
@@ -24,11 +32,13 @@ public class Player: MonoBehaviour {
     void Update() {
         // read input
         ReadMove();
+        ReadLook();
     }
 
     void FixedUpdate() {
         // move player
         Move();
+        Look();
     }
 
     // -- commands --
@@ -36,7 +46,19 @@ public class Player: MonoBehaviour {
     void ReadMove() {
     }
 
-    // move player
+    /// read move input
+    void ReadLook() {
+        var look = m_Actions.Look;
+        m_Look = Vector2.Dot(look, Vector2.up);
+    }
+
+    /// move player
     void Move() {
+    }
+
+    /// move camera
+    void Look() {
+        var torque = m_Look * m_LookSpeed * Time.deltaTime * Vector3.left;
+        m_Armature.AddRelativeTorque(torque);
     }
 }
