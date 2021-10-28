@@ -14,8 +14,11 @@ public sealed class Musicker: MonoBehaviour {
     [Tooltip("the audio source to realize sound")]
     [SerializeField] List<AudioSource> m_Sources;
 
-    [Tooltip("their current instrument")]
+    [Tooltip("the current instrument")]
     [SerializeField] Instrument m_Instrument;
+
+    [Tooltip("the template audio source")]
+    [SerializeField] AudioSource m_Template;
 
     // -- props --
     /// the index of the next available audio source
@@ -23,11 +26,14 @@ public sealed class Musicker: MonoBehaviour {
 
     // -- lifecycle --
     void Awake() {
-        var go = gameObject;
+        // make sure the template is in the
+        if (m_Template != null && !m_Sources.Contains(m_Template)) {
+            m_Sources.Add(m_Template);
+        }
 
         // create audio sources
         for (var i = m_Sources.Count; i < m_NumSources; i++) {
-            m_Sources.Add(go.AddComponent<AudioSource>());
+            m_Sources.Add(InitAudioSource());
         }
 
         // init loop module
@@ -126,6 +132,28 @@ public sealed class Musicker: MonoBehaviour {
         }
 
         return false;
+    }
+
+    // -- factories --
+    /// create a new audio source
+    AudioSource InitAudioSource() {
+        // add the audio source
+        var src = gameObject.AddComponent<AudioSource>();
+
+        // copy templated props
+        var tmp = m_Template;
+        if (tmp != null) {
+            src.minDistance = tmp.minDistance;
+            src.maxDistance = tmp.maxDistance;
+
+            var t0 = AudioSourceCurveType.CustomRolloff;
+            var t1 = AudioSourceCurveType.Spread;
+            for (var t = t0; t <= t1; t++) {
+                src.SetCustomCurve(t, tmp.GetCustomCurve(t));
+            }
+        }
+
+        return src;
     }
 
     //
