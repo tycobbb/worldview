@@ -8,11 +8,19 @@ public class Being: MonoBehaviour {
     [Tooltip("the musical key")]
     [SerializeField] Root m_KeyOf = Root.C;
 
-    [Tooltip("the musical interval")]
-    [SerializeField] Interval m_Interval = Interval.I;
+    // -- config --
+    [Header("tuning")]
+    [Tooltip("the base color")]
+    [SerializeField] Color m_Color = new Colors.Hsv(0.0f, 0.45f, 1.0f).ToRgb();
 
-    [Tooltip("the beings color")]
-    [SerializeField] Color m_Color = Color.red;
+    [Tooltip("the initial radius from center")]
+    [SerializeField] AnimationCurve m_Radius;
+
+    [Tooltip("the period of the movement loop")]
+    [SerializeField] AnimationCurve m_Period;
+
+    [Tooltip("the range of the movement loop")]
+    [SerializeField] AnimationCurve m_Range;
 
     // -- nodes --
     [Header("nodes")]
@@ -24,10 +32,13 @@ public class Being: MonoBehaviour {
 
     // -- props --
     /// the start position
-    Vector3 m_Start;
+    Vector3 m_Pos;
 
-    /// the position offset
+    /// the time offset
     float m_Offset;
+
+    /// the sampled range
+    float m_RangeVal;
 
     /// if the being is audible
     bool m_IsAudible;
@@ -41,34 +52,11 @@ public class Being: MonoBehaviour {
     // -- lifecycle --
     void Awake() {
         // set musical props
-        m_Key = new Key(
-            m_KeyOf
-        );
-
-        m_Loop = new Loop(
-            fade: 1.5f,
-            blend: 0.6f,
-            new Tone(m_Interval)
-        );
+        m_Key = new Key(m_KeyOf);
     }
 
     void Start() {
-        // set props
-        m_Start = transform.position;
-
-        // set color
-        m_Renderer.material.color = m_Color;
-
-        // start movement
-        var offset = new Lens<float>(
-            ( ) => m_Offset,
-            (v) => m_Offset = v
-        );
-
-        var _ = Tween
-            .Start(offset, 0.0f, 1.0f, 1.0f)
-            .SetLoops(-1, LoopType.Yoyo)
-            .SetEase(Ease.InOutCubic);
+        Sample();
     }
 
     void Update() {
@@ -77,18 +65,63 @@ public class Being: MonoBehaviour {
 
     void FixedUpdate() {
         Move();
-        Play();
+        Sing();
     }
 
     // -- commands --
+    /// sample random elements
+    void Sample() {
+        var t = transform;
+        var p = t.position;
+
+        // sample start pos
+        var r = m_Radius.Sample();
+        var a = 2.0f * Mathf.PI * Random.value;
+        p.y = r * Mathf.Cos(a);
+        p.z = r * Mathf.Sin(a);
+
+        m_Pos = t.position = p;
+
+        // sample color
+        var color = m_Color.ToHsv().Hue(Random.value).ToRgb();
+        m_Renderer.material.color = color;
+
+        // sample loop
+        m_Loop = new Loop(
+            fade: 1.5f,
+            blend: 0.6f,
+            new Tone(Random.Range(0, 12)).Octave(Random.Range(0, 2))
+        );
+
+        // start movement
+        Play(m_Range.Sample(), m_Period.Sample());
+    }
+
+    /// start the being's movement
+    void Play(float range, float period) {
+        // store range
+        m_RangeVal = range;
+
+        // tween offset
+        var offset = new Lens<float>(
+            ( ) => m_Offset,
+            (v) => m_Offset = v
+        );
+
+        var _ = offset
+            .TweenTo(-1.0f, 1.0f, period)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutCubic);
+    }
+
     /// move the being
     void Move() {
         var t = transform;
-        t.position = m_Start + m_Offset * Vector3.right;
+        transform.position = m_Pos + m_Offset * m_RangeVal * Vector3.right;
     }
 
     /// play the audio loop
-    void Play() {
+    void Sing() {
         m_Music.ToggleLoop(m_Loop, m_IsAudible, m_Key);
     }
 

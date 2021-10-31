@@ -1,11 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 /// a thing that plays music
 public sealed class Musicker: MonoBehaviour {
+    // -- tuning --
+    [Header("tuning")]
+    [Tooltip("the max volume")]
+    [Range(0.0f, 1.0f)]
+    [SerializeField] float m_MaxVolume;
+
+    [Tooltip("the template audio source")]
+    [SerializeField] AudioSource m_Template;
+
     // -- config --
     [Header("config")]
     [Tooltip("the number of audio sources to create or keep")]
@@ -16,9 +23,6 @@ public sealed class Musicker: MonoBehaviour {
 
     [Tooltip("the current instrument")]
     [SerializeField] Instrument m_Instrument;
-
-    [Tooltip("the template audio source")]
-    [SerializeField] AudioSource m_Template;
 
     // -- props --
     /// the index of the next available audio source
@@ -224,7 +228,7 @@ public sealed class Musicker: MonoBehaviour {
     /// play the loop
     IEnumerator PlayLoopAsync(Loop loop, Key? key = null) {
         // fade in
-        Tween.Start(VolumeLens(), 0.0f, 1.0f, loop.Fade);
+        VolumeLens().TweenTo(0.0f, 1.0f, duration: loop.Fade);
 
         // the time between loop plays
         var blend = loop.Blend;
@@ -236,7 +240,7 @@ public sealed class Musicker: MonoBehaviour {
             var source = VolumeLens(i);
 
             // blend in the tone
-            Tween.Start(source, 0.0f, 1.0f, blend);
+            source.TweenTo(0.0f, 1.0f, duration: blend);
 
             // play the tone
             PlayTone(loop.Curr(), key);
@@ -249,7 +253,7 @@ public sealed class Musicker: MonoBehaviour {
             }
 
             // blend out the tone
-            Tween.Start(source, 1.0f, 0.0f, blend);
+            source.TweenTo(1.0f, 0.0f, duration: blend);
         }
     }
 
@@ -264,7 +268,7 @@ public sealed class Musicker: MonoBehaviour {
         StopCoroutine(m_Routine);
 
         // fade out
-        Tween.Start(VolumeLens(), 1.0f, 0.0f, m_Loop.Fade);
+        VolumeLens().TweenTo(1.0f, 0.0f, duration: m_Loop.Fade);
 
         // reset state
         m_Loop = null;

@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cb7056b75bb4d45bb30a2a42622a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Size: 1
+  m_Camera: {fileID: 0}
 --- !u!20 &8039918060164294606
 Camera:
   m_ObjectHideFlags: 0
@@ -79,7 +81,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 791dec806d3d54a0b9219343c6cb244d, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

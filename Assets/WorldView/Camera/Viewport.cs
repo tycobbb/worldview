@@ -1,6 +1,7 @@
 using UnityEngine;
 
 /// the camera's viewport
+[ExecuteAlways]
 public class Viewport: MonoBehaviour {
     // -- tuning --
     [Header("tuning")]
@@ -14,9 +15,9 @@ public class Viewport: MonoBehaviour {
 
     // -- lifecycle --
     void Update() {
-        var h = Screen.width;
+        var w = Screen.width;
         var r = m_Camera.pixelRect;
-        r.x = h / 2.0f - m_Size;
+        r.x = w / 2.0f - m_Size;
         r.width = m_Size;
         m_Camera.pixelRect = r;
     }

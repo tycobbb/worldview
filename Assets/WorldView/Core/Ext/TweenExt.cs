@@ -2,10 +2,20 @@ using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 
-public static class Tween {
+/// extensions for making tweens
+public static class TweenExt {
+    /// tween the lens w/ a linear value
+    public static TweenerCore<float, float, FloatOptions> TweenTo(
+        this Lens<float> prop,
+        float src,
+        Linear<float> dst
+    ) {
+        return prop.TweenTo(src, dst.Value, dst.Scale);
+    }
+
     /// tween the lens
-    public static TweenerCore<float, float, FloatOptions> Start(
-        Lens<float> prop,
+    public static TweenerCore<float, float, FloatOptions> TweenTo(
+        this Lens<float> prop,
         float src,
         float dst,
         float duration
