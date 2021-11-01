@@ -4910,10 +4910,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 939850681}
     m_Modifications:
-    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
-      propertyPath: m_SingRange.m_Curve.Array.data[1].value
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7627500171584167736, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
       propertyPath: m_RootOrder
       value: 0

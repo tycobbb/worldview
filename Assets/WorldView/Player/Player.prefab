@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9cbee98a5404ec997d2a16a7b550f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MoveSpeed: 10
   m_LookSpeed: 20
   m_HearingRange: 20
   m_HearingThreshold: 0.825
@@ -63,7 +64,7 @@ Rigidbody:
   m_GameObject: {fileID: 4562596083273999880}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -96,7 +97,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
