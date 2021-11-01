@@ -4910,6 +4910,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 939850681}
     m_Modifications:
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[1].time
+      value: 0.30095506
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[2].time
+      value: 0.49785817
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[3].time
+      value: 0.5495584
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[4].time
+      value: 0.824044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[5].time
+      value: 0.84201723
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[6].time
+      value: 0.9334763
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[7].time
+      value: 0.98284364
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[2].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[6].value
+      value: 10.041276
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[7].value
+      value: 9.020646
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_Tone.m_Curve.Array.data[8].value
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7627500171584167736, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
       propertyPath: m_RootOrder
       value: 0

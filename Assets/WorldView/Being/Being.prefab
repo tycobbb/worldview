@@ -129,41 +129,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 6.228449
-      outSlope: 6.228449
-      tangentMode: 34
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.16055362
-      value: 1
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.17081094
-      value: 2
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1926918
-      value: 3
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.22155595
+      time: 0.21726409
       value: 4
       inSlope: Infinity
       outSlope: Infinity
@@ -172,8 +145,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.39567143
-      value: 5
+      time: 0.43133456
+      value: 3
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -181,16 +154,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.4510718
-      value: 6
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4701593
+      time: 0.4658674
       value: 7
       inSlope: Infinity
       outSlope: Infinity
@@ -199,8 +163,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7043307
-      value: 8
+      time: 0.7103101
+      value: 6
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -208,8 +172,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7234182
-      value: 9
+      time: 0.74545074
+      value: 11
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -217,7 +181,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.74250567
+      time: 0.92489266
       value: 10
       inSlope: Infinity
       outSlope: Infinity
@@ -226,8 +190,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8076825
-      value: 11
+      time: 0.97426
+      value: 8.97937
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -236,7 +200,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 11
+      value: 10
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
