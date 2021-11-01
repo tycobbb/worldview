@@ -8,6 +8,9 @@ public class Viewport: MonoBehaviour {
     [Tooltip("the collapse curve")]
     [SerializeField] AnimationCurve m_Collapse;
 
+    [Tooltip("the collapse delay in seconds")]
+    [SerializeField] float m_CollapseDelay = 30.0f;
+
     // -- nodes --
     [Header("nodes")]
     [Tooltip("the canvas")]
@@ -40,8 +43,6 @@ public class Viewport: MonoBehaviour {
     // -- commands --
     /// start the collapse animation
     void Play() {
-        var duration = m_Collapse.keys[m_Collapse.length - 1].time;
-
         // start animation
         var pct = new Lens<float>(
             ( ) => m_Percent,
@@ -49,8 +50,9 @@ public class Viewport: MonoBehaviour {
         );
 
         var _ = pct
-            .TweenTo(0.0f, 1.0f, duration)
-            .SetEase(m_Collapse);
+            .TweenTo(0.0f, 1.0f, m_Collapse.Duration())
+            .SetEase(m_Collapse)
+            .SetDelay(m_CollapseDelay);
     }
 
     /// collapse the viewport

@@ -9,6 +9,9 @@ public class Player: MonoBehaviour {
 
     // -- tuning --
     [Header("tuning")]
+    [Tooltip("the move speed, a force")]
+    [SerializeField] float m_MoveSpeed = 0.5f;
+
     [Tooltip("the look speed, a torque")]
     [SerializeField] float m_LookSpeed = 0.5f;
 
@@ -30,11 +33,14 @@ public class Player: MonoBehaviour {
     [SerializeField] PlayerInput m_Input;
 
     // -- props --
-    /// the current look magnitude
+    /// the current move mag
+    float m_Move;
+
+    /// the current look mag
     float m_Look;
 
     /// the list of heard beings
-    Collider[] m_Heard = new Collider[100];
+    Collider[] m_Heard = new Collider[50];
 
     /// the player's inputs
     PlayerActions m_Actions;
@@ -68,6 +74,8 @@ public class Player: MonoBehaviour {
     // -- commands --
     /// read move input
     void ReadMove() {
+        var move = m_Actions.Move;
+        m_Move = Vector2.Dot(move, Vector2.up);
     }
 
     /// read move input
@@ -78,12 +86,14 @@ public class Player: MonoBehaviour {
 
     /// move player
     void Move() {
+        var move = m_Move * m_MoveSpeed * Time.deltaTime * m_Root.forward;
+        m_Body.AddForce(move);
     }
 
     /// move camera
     void Look() {
-        var torque = m_Look * m_LookSpeed * Time.deltaTime * Vector3.left;
-        m_Body.AddRelativeTorque(torque);
+        var turn = m_Look * m_LookSpeed * Time.deltaTime * Vector3.left;
+        m_Body.AddRelativeTorque(turn);
     }
 
     // listen for beings
