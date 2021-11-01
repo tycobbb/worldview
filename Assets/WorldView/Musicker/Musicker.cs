@@ -100,10 +100,17 @@ public sealed class Musicker: MonoBehaviour {
     }
 
     // -- c/config
-    /// set the pitch of this player
+    /// set the pitch
     public void SetPitch(float pitch) {
         foreach (var source in m_Sources) {
             source.pitch = pitch;
+        }
+    }
+
+    /// set the maximum distance
+    public void SetMaxDistance(float distance) {
+        foreach (var source in m_Sources) {
+            source.maxDistance = distance;
         }
     }
 

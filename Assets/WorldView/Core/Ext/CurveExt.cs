@@ -12,4 +12,9 @@ public static class CurveExt {
     public static float Sample(this AnimationCurve c) {
         return c.Evaluate(Random.value);
     }
+
+    /// sample a random value from the curve
+    public static int SampleInt(this AnimationCurve c) {
+        return Mathf.FloorToInt(c.Sample());
+    }
 }

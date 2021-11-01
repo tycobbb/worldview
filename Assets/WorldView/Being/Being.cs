@@ -16,11 +16,17 @@ public class Being: MonoBehaviour {
     [Tooltip("the initial radius from center")]
     [SerializeField] AnimationCurve m_Radius;
 
-    [Tooltip("the period of the movement loop")]
+    [Tooltip("the period of the movement")]
     [SerializeField] AnimationCurve m_Period;
 
-    [Tooltip("the range of the movement loop")]
+    [Tooltip("the range of the movement")]
     [SerializeField] AnimationCurve m_Range;
+
+    [Tooltip("the tone this plays")]
+    [SerializeField] AnimationCurve m_Tone;
+
+    [Tooltip("the audio range")]
+    [SerializeField] AnimationCurve m_SingRange;
 
     // -- nodes --
     [Header("nodes")]
@@ -86,11 +92,14 @@ public class Being: MonoBehaviour {
         var color = m_Color.ToHsv().Hue(Random.value).ToRgb();
         m_Renderer.material.color = color;
 
+        // sample range
+        m_Music.SetMaxDistance(m_SingRange.Sample());
+
         // sample loop
         m_Loop = new Loop(
             fade: 1.5f,
             blend: 0.6f,
-            new Tone(Random.Range(0, 12)).Octave(Random.Range(0, 2))
+            new Tone(m_Tone.SampleInt()).Octave(Random.Range(0, 2))
         );
 
         // start movement

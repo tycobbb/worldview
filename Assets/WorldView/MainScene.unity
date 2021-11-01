@@ -3882,6 +3882,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 408289371547382750, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1550121391304567474, guid: 588e1bc17f93f4a92aa22bcbcad46394, type: 3}
       propertyPath: m_Drag
       value: 1
@@ -4828,7 +4832,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_CollapseDelay: 30
+  m_CollapseDelay: 180
   m_Canvas: {fileID: 2087325025}
   m_Viewport: {fileID: 174416196}
 --- !u!1001 &863167442443756461
@@ -4906,6 +4910,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 939850681}
     m_Modifications:
+    - target: {fileID: 7627500171584167732, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
+      propertyPath: m_SingRange.m_Curve.Array.data[1].value
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7627500171584167736, guid: 046c674f3cb2f46bab68b20332ca37b8, type: 3}
       propertyPath: m_RootOrder
       value: 0
